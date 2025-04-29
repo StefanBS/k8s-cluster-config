@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:StefanBS/k8s-cluster-config.git
+    repoURL: https://github.com/StefanBS/k8s-cluster-config.git
     path: applications
     targetRevision: HEAD
   destination:
