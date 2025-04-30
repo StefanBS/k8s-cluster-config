@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app-rollouts
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/StefanBS/k8s-cluster-config.git
+    path: manifests/test-argo-rollouts
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test-rollouts
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
