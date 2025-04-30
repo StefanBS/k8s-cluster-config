@@ -3,20 +3,6 @@ kind: Namespace
 metadata:
   name: test-flagger
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-service-flagger
-  namespace: test-flagger
-spec:
-  ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    name: http
-  selector:
-    app: nginx-flagger # Selector should match the Deployment's labels
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
