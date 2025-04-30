@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app-flagger
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/StefanBS/k8s-cluster-config.git
+    path: manifests/test-flagger
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test-flagger
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  # Ignore resources created dynamically by Flagger
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/replicas # Flagger modifies replicas during canary
+  - group: "" # Core group
+    kind: Service
+    # Flagger might add labels/annotations to the main service
+    # It also creates -primary and -canary services which shouldn't be pruned
