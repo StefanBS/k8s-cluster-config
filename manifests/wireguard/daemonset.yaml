@@ -36,13 +36,9 @@ spec:
             - name: SERVERURL
               value: 91.99.30.223
             - name: PEERS
-              value: peer1
-            # - name: PEERDNS # Defaults to "auto" (uses CoreDNS in container)
-            #   value: "auto"
+              value: home
             - name: INTERNAL_SUBNET
-              value: 10.10.10.1/24
-            # - name: ALLOWEDIPS # Defaults to 0.0.0.0/0, ::/0 (routes all client traffic)
-            #   value: "0.0.0.0/0, ::/0"
+              value: 10.0.0.0/24
             - name: LOG_CONFS
               value: "true"
           ports:
