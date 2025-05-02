@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: wireguard
+  namespace: wireguard
+  labels:
+    app: wireguard
+spec:
+  selector:
+    matchLabels:
+      app: wireguard
+  template:
+    metadata:
+      labels:
+        app: wireguard
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: wireguard
+          image: lscr.io/linuxserver/wireguard:latest
+          securityContext:
+            privileged: false
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_MODULE
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+            - name: SERVERURL
+              value: 91.99.30.223
+            - name: PEERS
+              value: peer1
+            # - name: PEERDNS # Defaults to "auto" (uses CoreDNS in container)
+            #   value: "auto"
+            - name: INTERNAL_SUBNET
+              value: 10.10.10.1/24
+            # - name: ALLOWEDIPS # Defaults to 0.0.0.0/0, ::/0 (routes all client traffic)
+            #   value: "0.0.0.0/0, ::/0"
+            - name: LOG_CONFS
+              value: "true"
+          ports:
+            - name: wireguard
+              containerPort: 51820
+              protocol: UDP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: modules
+              mountPath: /lib/modules
+              readOnly: true
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: wireguard-config
+        - name: modules
+          hostPath:
+            path: /lib/modules
+            type: Directory

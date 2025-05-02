@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: wireguard-allow-external
+  namespace: wireguard
+spec:
+  podSelector:
+    matchLabels:
+      app: wireguard
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from: []
+      ports:
+        - protocol: UDP
+          port: 51820
+  egress:
+    - to: []
