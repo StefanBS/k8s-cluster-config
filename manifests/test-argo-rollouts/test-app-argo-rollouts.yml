@@ -24,6 +24,7 @@ metadata:
   namespace: test-rollouts
 spec:
   replicas: 3
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: nginx-rollouts     # Selector for pods managed by this Rollout
