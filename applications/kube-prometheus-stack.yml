@@ -20,7 +20,7 @@ spec:
                   resources:
                     requests:
                       storage: 10Gi
-                  storageClassName: ""
+                  storageClassName: "local-path"
             resources:
               requests:
                 memory: 1Gi
@@ -32,7 +32,7 @@ spec:
           adminPassword: "yourSecurePassword"
           persistence:
             enabled: true
-            storageClassName: ""
+            storageClassName: "local-path"
             size: 10Gi
         alertmanager:
           alertmanagerSpec:
@@ -43,7 +43,7 @@ spec:
                   resources:
                     requests:
                       storage: 1Gi
-                  storageClassName: ""
+                  storageClassName: "local-path"
             resources:
               requests:
                 memory: 500Mi
