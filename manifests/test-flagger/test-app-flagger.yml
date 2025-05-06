@@ -10,6 +10,7 @@ metadata:
   namespace: test-flagger
 spec:
   replicas: 3
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: nginx-flagger
