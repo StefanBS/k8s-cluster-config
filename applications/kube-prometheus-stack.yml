@@ -23,10 +23,10 @@ spec:
                   storageClassName: "local-path"
             resources:
               requests:
-                memory: 1Gi
+                memory: 500mi
                 cpu: 500m
               limits:
-                memory: 2Gi
+                memory: 1Gi
                 cpu: 1000m
         grafana:
           adminPassword: "yourSecurePassword"
