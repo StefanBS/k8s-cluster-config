@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.27.0
+        image: nginx:1.28.0
         ports:
         - containerPort: 80
 ---
@@ -38,7 +38,7 @@ spec:
   service:
     port: 80
   analysis:
-    interval: 10s
+    interval: 20s
     threshold: 5
     maxWeight: 50
     stepWeight: 10
