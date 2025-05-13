@@ -16,6 +16,7 @@ spec:
         meshProvider: traefik
         traefik:
           namespace: "kube-system" # Tells Flagger where Traefik is running
+          apiGroup: "traefik.io" # Specify the correct Traefik API group
   destination:
     server: https://kubernetes.default.svc
     namespace: flagger
